@@ -41,6 +41,17 @@ public class VeiculoService {
 		return new VeiculoDTO(exists);
 	}
 	
+	public VeiculoDTO patchUpdate(Long id, VeiculoPostDTO veiculo) {
+		Veiculo exists = repository.findById(id).get();
+		exists = fromPatchDTO(exists, veiculo);
+		exists = repository.save(exists);
+		return new VeiculoDTO(exists);
+	}
+	
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
+	
 	private Veiculo fromDTO(VeiculoPostDTO data) {
 		Veiculo veiculo = new Veiculo();
 		
@@ -60,6 +71,26 @@ public class VeiculoService {
 		veiculo.setAno(data.getAno());
 		veiculo.setDescricao(data.getDescricao());
 		veiculo.setVendido(data.getVendido());
+		
+		return veiculo;
+	}
+	
+	private Veiculo fromPatchDTO(Veiculo veiculo, VeiculoPostDTO data) {
+		
+		if(data.getVeiculo() != null)
+			veiculo.setVeiculo(data.getVeiculo());
+		
+		if(data.getMarca() != null)
+			veiculo.setMarca(data.getMarca());
+		
+		if(data.getAno() != null)
+			veiculo.setAno(data.getAno());
+		
+		if(data.getDescricao() != null)
+			veiculo.setDescricao(data.getDescricao());
+		
+		if(data.getVendido() != null)
+			veiculo.setVendido(data.getVendido());
 		
 		return veiculo;
 	}
