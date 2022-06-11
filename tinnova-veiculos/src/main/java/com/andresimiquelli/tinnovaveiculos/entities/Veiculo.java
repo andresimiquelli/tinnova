@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -126,5 +128,15 @@ public class Veiculo implements Serializable {
 		Veiculo other = (Veiculo) obj;
 		return Objects.equals(id, other.id);
 	}
+	
+	@PrePersist
+	protected void onCreate() {
+		created = new Date();
+	}
+
+	 @PreUpdate
+	 protected void onUpdate() {
+		 updated = new Date();
+	 }
 	
 }
