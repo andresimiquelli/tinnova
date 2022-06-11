@@ -1,4 +1,4 @@
-package com.andresimiquelli.hrpayroll;
+package com.andresimiquelli.tinnovaveiculos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
