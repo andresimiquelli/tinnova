@@ -21,6 +21,7 @@ import com.andresimiquelli.tinnovaveiculos.dtos.VeiculoDTO;
 import com.andresimiquelli.tinnovaveiculos.dtos.VeiculoDecadaDTO;
 import com.andresimiquelli.tinnovaveiculos.dtos.VeiculoPostDTO;
 import com.andresimiquelli.tinnovaveiculos.dtos.VeiculoTotalEstoqueDTO;
+import com.andresimiquelli.tinnovaveiculos.dtos.VeiculoTotalMarcaDTO;
 import com.andresimiquelli.tinnovaveiculos.services.VeiculoService;
 
 @RestController
@@ -70,15 +71,21 @@ public class VeiculoResource {
 		service.delete(id);
 	}
 	
-	@GetMapping(value = "/estoque")
+	@GetMapping(value = "/total/estoque")
 	public ResponseEntity<VeiculoTotalEstoqueDTO> getTotalEstoque() {
 		VeiculoTotalEstoqueDTO total = service.countTotalVendido(false);
 		return ResponseEntity.ok(total);
 	}
 	
-	@GetMapping(value = "/decadas")
+	@GetMapping(value = "/total/decadas")
 	public ResponseEntity<List<VeiculoDecadaDTO>> getTotalByDecada() {
 		List<VeiculoDecadaDTO> list = service.countTotalByDecada();
+		return ResponseEntity.ok(list);
+	}
+	
+	@GetMapping(value = "/total/marcas")
+	public ResponseEntity<List<VeiculoTotalMarcaDTO>> getTotalByMarca() {
+		List<VeiculoTotalMarcaDTO> list = service.countTotalByMarca();
 		return ResponseEntity.ok(list);
 	}
 }

@@ -2,6 +2,8 @@ package com.andresimiquelli.tinnovaveiculos.repositories;
 
 import java.util.List;
 
+import javax.persistence.Tuple;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -34,5 +36,6 @@ public interface VeiculoRepository extends JpaRepository<Veiculo, Long> {
 	@Query("SELECT COUNT(*) FROM Veiculo WHERE ano >= ?1 AND ano <= ?2")
 	int countByAno(int start, int end);
 	
-	int countByMarca(String marca);
+	@Query("SELECT marca, COUNT(*) AS total FROM Veiculo GROUP BY marca")
+	List<Tuple> countByMarca();
 }

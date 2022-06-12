@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.Tuple;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,7 @@ import com.andresimiquelli.tinnovaveiculos.dtos.VeiculoDTO;
 import com.andresimiquelli.tinnovaveiculos.dtos.VeiculoDecadaDTO;
 import com.andresimiquelli.tinnovaveiculos.dtos.VeiculoPostDTO;
 import com.andresimiquelli.tinnovaveiculos.dtos.VeiculoTotalEstoqueDTO;
+import com.andresimiquelli.tinnovaveiculos.dtos.VeiculoTotalMarcaDTO;
 import com.andresimiquelli.tinnovaveiculos.entities.Veiculo;
 import com.andresimiquelli.tinnovaveiculos.repositories.VeiculoRepository;
 import com.andresimiquelli.tinnovaveiculos.utils.CalcDecada;
@@ -117,6 +120,15 @@ public class VeiculoService {
 			int total = repository.countByAno(decada, decada+9);
 			list.add(new VeiculoDecadaDTO(decada, total));
 		}
+		
+		return list;
+	}
+	
+	public List<VeiculoTotalMarcaDTO> countTotalByMarca() {
+		List<Tuple> tuples = repository.countByMarca();
+		List<VeiculoTotalMarcaDTO> list = tuples.stream()
+				.map(item -> new VeiculoTotalMarcaDTO((String) item.get(0), (Long) item.get(1)))
+				.collect(Collectors.toList());
 		
 		return list;
 	}
