@@ -18,24 +18,44 @@ public class VeiculoService {
 	@Autowired
 	private VeiculoRepository repository;
 	
-	public List<VeiculoDTO> listAll(String marca, Integer ano) {
+	public List<VeiculoDTO> listAll(String marca, Integer ano, String cor) {
 		
 		List<VeiculoDTO> list = new ArrayList<>();
 		
-		if(marca != null || ano != null) {
+		if(marca != null || ano != null || cor != null) {
 			
-			if(marca != null && ano == null) {
+			if(marca != null && ano == null && cor == null) {
 				List<Veiculo> result = repository.findByMarca(marca);
 				list = resultToDTOList(result);
 			}
 			
-			if(marca == null && ano != null) {
+			if(marca == null && ano != null && cor == null) {
 				List<Veiculo> result = repository.findByAno(ano);
 				list = resultToDTOList(result);
 			}
 			
-			if(marca != null && ano != null) {
+			if(marca == null && ano == null && cor != null) {
+				List<Veiculo> result = repository.findByCor(cor);
+				list = resultToDTOList(result);
+			}
+			
+			if(marca != null && ano != null && cor == null) {
 				List<Veiculo> result = repository.findByAnoAndMarca(ano, marca);
+				list = resultToDTOList(result);
+			}
+			
+			if(marca == null && ano != null && cor != null) {
+				List<Veiculo> result = repository.findByAnoAndCor(ano, cor);
+				list = resultToDTOList(result);
+			}
+			
+			if(marca != null && ano == null && cor != null) {
+				List<Veiculo> result = repository.findByMarcaAndCor(marca, cor);
+				list = resultToDTOList(result);
+			}
+			
+			if(marca != null && ano != null && cor != null) {
+				List<Veiculo> result = repository.findByAnoAndMarcaAndCor(ano, marca, cor);
 				list = resultToDTOList(result);
 			}
 			
@@ -82,6 +102,7 @@ public class VeiculoService {
 		veiculo.setVeiculo(data.getVeiculo());
 		veiculo.setMarca(data.getMarca());
 		veiculo.setAno(data.getAno());
+		veiculo.setCor(data.getCor());
 		veiculo.setDescricao(data.getDescricao());
 		veiculo.setVendido(data.getVendido());
 		
@@ -93,6 +114,7 @@ public class VeiculoService {
 		veiculo.setVeiculo(data.getVeiculo());
 		veiculo.setMarca(data.getMarca());
 		veiculo.setAno(data.getAno());
+		veiculo.setCor(data.getCor());
 		veiculo.setDescricao(data.getDescricao());
 		veiculo.setVendido(data.getVendido());
 		
@@ -109,6 +131,9 @@ public class VeiculoService {
 		
 		if(data.getAno() != null)
 			veiculo.setAno(data.getAno());
+		
+		if(data.getCor() != null)
+			veiculo.setCor(data.getCor());
 		
 		if(data.getDescricao() != null)
 			veiculo.setDescricao(data.getDescricao());

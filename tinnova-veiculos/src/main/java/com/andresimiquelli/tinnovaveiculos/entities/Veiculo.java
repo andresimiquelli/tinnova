@@ -24,8 +24,9 @@ public class Veiculo implements Serializable {
 	private String veiculo;
 	private String marca;
 	private Integer ano;
+	private String cor;
 	private String descricao;
-	private Boolean vendido;
+	private Boolean vendido;	
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date created;
@@ -35,13 +36,14 @@ public class Veiculo implements Serializable {
 	
 	public Veiculo() {}
 
-	public Veiculo(Long id, String veiculo, String marca, Integer ano, String descricao, Boolean vendido,
+	public Veiculo(Long id, String veiculo, String marca, Integer ano, String cor, String descricao, Boolean vendido,
 			Date created, Date updated) {
 
 		this.id = id;
 		this.veiculo = veiculo;
 		this.marca = marca;
 		this.ano = ano;
+		this.cor = cor;
 		this.descricao = descricao;
 		this.vendido = vendido;
 		this.created = created;
@@ -79,6 +81,14 @@ public class Veiculo implements Serializable {
 	public void setAno(Integer ano) {
 		this.ano = ano;
 	}
+	
+	public String getCor() {
+		return cor;
+	}
+	
+	public void setCor(String cor) {
+		this.cor = cor;
+	}
 
 	public String getDescricao() {
 		return descricao;
@@ -87,6 +97,7 @@ public class Veiculo implements Serializable {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
 
 	public Boolean getVendido() {
 		return vendido;

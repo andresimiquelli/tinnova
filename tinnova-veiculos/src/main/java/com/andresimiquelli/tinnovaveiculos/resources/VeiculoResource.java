@@ -30,8 +30,10 @@ public class VeiculoResource {
 	
 	@GetMapping
 	public ResponseEntity<List<VeiculoDTO>> findAll(
-			@RequestParam(required = false) String marca, @RequestParam(required = false) Integer ano ) {
-		List<VeiculoDTO> list = service.listAll(marca, ano);
+			@RequestParam(required = false) String marca, @RequestParam(required = false) Integer ano, 
+			@RequestParam(required = false) String cor) {
+		
+		List<VeiculoDTO> list = service.listAll(marca, ano, cor);
 		return ResponseEntity.ok(list);
 	}
 	

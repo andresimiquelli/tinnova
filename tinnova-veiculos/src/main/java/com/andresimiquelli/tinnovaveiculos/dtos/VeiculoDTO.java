@@ -10,6 +10,7 @@ public class VeiculoDTO {
 	private String veiculo;
 	private String marca;
 	private Integer ano;
+	private String cor;
 	private String descricao;
 	private Boolean vendido;
 	private Date created;
@@ -22,19 +23,21 @@ public class VeiculoDTO {
 		this.veiculo = veiculo.getVeiculo();
 		marca = veiculo.getMarca();
 		ano = veiculo.getAno();
+		cor = veiculo.getCor();
 		descricao = veiculo.getDescricao();
 		vendido = veiculo.getVendido();
 		created = veiculo.getCreated();
 		updated = veiculo.getUpdated();
 	}
 
-	public VeiculoDTO(Long id, String veiculo, String marca, Integer ano, String descricao, Boolean vendido,
+	public VeiculoDTO(Long id, String veiculo, String marca, Integer ano, String cor, String descricao, Boolean vendido,
 			Date created, Date updated) {
 
 		this.id = id;
 		this.veiculo = veiculo;
 		this.marca = marca;
 		this.ano = ano;
+		this.cor = cor;
 		this.descricao = descricao;
 		this.vendido = vendido;
 		this.created = created;
@@ -71,6 +74,14 @@ public class VeiculoDTO {
 
 	public void setAno(Integer ano) {
 		this.ano = ano;
+	}
+	
+	public String getCor() {
+		return cor;
+	}
+	
+	public void setCor(String cor) {
+		this.cor = cor;
 	}
 
 	public String getDescricao() {
