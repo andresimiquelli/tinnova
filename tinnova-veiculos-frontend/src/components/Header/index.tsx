@@ -3,6 +3,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 
 import '../Header/index.css';
 import Navbar from '../Navbar';
+import TotalEstoque from '../TotalEstoque';
 
 interface HeaderProps {
     title: string;
@@ -14,9 +15,12 @@ const Header: React.FC<HeaderProps> = ( props ) => {
             <Container>
                 <Row className='pb-3 pt-3'>
                     <Col>
-                        <h1>{props.title}</h1>
+                        <h3>{props.title}</h3>
                     </Col>
-                    <Col>
+                    <Col lg={'2'}>
+                        <TotalEstoque />
+                    </Col>
+                    <Col>                        
                         <Navbar />
                     </Col>
                 </Row>

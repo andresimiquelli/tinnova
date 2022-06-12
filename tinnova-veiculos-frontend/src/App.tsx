@@ -18,6 +18,7 @@ const App:React.FC = () => {
           <Route path="/form/:id" element={<FormVeiculos />} />
           <Route path="/por-marca" element={<ListaMarcas />} />
           <Route path="/por-decada" element={<ListDecadas />} />
+          <Route path="/ultima-semana" element={<ListaVeiculos lasWeek />} />
         </Routes>
       </div>
     </HashRouter>

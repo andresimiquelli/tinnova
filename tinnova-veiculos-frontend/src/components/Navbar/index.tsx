@@ -10,6 +10,7 @@ const Navbar: React.FC = () => {
 
     return (
         <div>
+            <Button variant='info' onClick={() => navigate('/')}>Lista completa</Button> &nbsp;
             <Button variant='info' onClick={() => navigate('/por-decada')}>Por década</Button> &nbsp;
             <Button variant='info' onClick={() => navigate('/por-marca')}>Por Marca</Button> &nbsp;
             <Button variant='info' onClick={() => navigate('/ultima-semana')}>Última semana</Button> &nbsp;

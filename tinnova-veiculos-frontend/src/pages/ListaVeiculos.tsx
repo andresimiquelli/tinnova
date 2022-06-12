@@ -20,7 +20,11 @@ interface veiculo {
     updated: string;
 }
 
-const ListaVeiculos: React.FC = () => {
+interface ListaVeiculosProps {
+    lasWeek?: boolean
+}
+
+const ListaVeiculos: React.FC<ListaVeiculosProps> = ( { lasWeek } ) => {
 
     const navigate = useNavigate()
     const[veiculos, setVeiculos] = useState([] as veiculo[])
@@ -28,13 +32,36 @@ const ListaVeiculos: React.FC = () => {
     const[deleteId, setDeleteId] = useState(0)
 
     useEffect(() => {
-        loadVeiculos()
+        if(lasWeek)
+            loadLastWeek()
+        else
+            loadVeiculos()
     },[])
 
     function loadVeiculos() {
         axios.get(apiUrl+'/veiculos').then(
             response => {
                 setVeiculos(response.data as veiculo[])
+            }
+        )
+        .catch(
+            error => {
+                console.log(error)
+                alert("Erro ao carregar veículos")
+            }
+        )
+    }
+
+    function loadLastWeek() {
+        axios.get(apiUrl+'/veiculos').then(
+            response => {
+                setVeiculos(response.data as veiculo[])
+            }
+        )
+        .catch(
+            error => {
+                console.log(error)
+                alert("Erro ao carregar veículos")
             }
         )
     }
@@ -68,7 +95,7 @@ const ListaVeiculos: React.FC = () => {
 
     return (
         <>
-        <Header title='Tinnova' />
+        <Header title={lasWeek? 'Cadastros da última semana' : 'Lista de veículos'} />
         <Container>
             <Row className="mb-3">
                 <Col>
