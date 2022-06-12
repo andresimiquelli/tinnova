@@ -3,6 +3,8 @@ package com.andresimiquelli.tinnovaveiculos.resources;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -47,7 +49,7 @@ public class VeiculoResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<VeiculoDTO> insert(@RequestBody VeiculoPostDTO veiculo) {
+	public ResponseEntity<VeiculoDTO> insert(@Valid @RequestBody VeiculoPostDTO veiculo) {
 		VeiculoDTO newVeiculo = service.store(veiculo);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
 				.buildAndExpand(newVeiculo.getId()).toUri();

@@ -1,5 +1,8 @@
 package com.andresimiquelli.tinnovaveiculos.dtos;
 
+import com.andresimiquelli.tinnovaveiculos.services.VeiculoPostValidation;
+
+@VeiculoPostValidation
 public class VeiculoPostDTO {
 
 	private String veiculo;
