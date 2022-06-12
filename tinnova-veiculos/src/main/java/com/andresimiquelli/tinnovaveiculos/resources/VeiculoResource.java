@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.andresimiquelli.tinnovaveiculos.dtos.VeiculoDTO;
+import com.andresimiquelli.tinnovaveiculos.dtos.VeiculoDecadaDTO;
 import com.andresimiquelli.tinnovaveiculos.dtos.VeiculoPostDTO;
+import com.andresimiquelli.tinnovaveiculos.dtos.VeiculoTotalEstoqueDTO;
 import com.andresimiquelli.tinnovaveiculos.services.VeiculoService;
 
 @RestController
@@ -66,5 +68,17 @@ public class VeiculoResource {
 	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable Long id) {
 		service.delete(id);
+	}
+	
+	@GetMapping(value = "/estoque")
+	public ResponseEntity<VeiculoTotalEstoqueDTO> getTotalEstoque() {
+		VeiculoTotalEstoqueDTO total = service.countTotalVendido(false);
+		return ResponseEntity.ok(total);
+	}
+	
+	@GetMapping(value = "/decadas")
+	public ResponseEntity<List<VeiculoDecadaDTO>> getTotalByDecada() {
+		List<VeiculoDecadaDTO> list = service.countTotalByDecada();
+		return ResponseEntity.ok(list);
 	}
 }

@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.andresimiquelli.tinnovaveiculos.dtos.VeiculoDTO;
+import com.andresimiquelli.tinnovaveiculos.dtos.VeiculoDecadaDTO;
 import com.andresimiquelli.tinnovaveiculos.dtos.VeiculoPostDTO;
+import com.andresimiquelli.tinnovaveiculos.dtos.VeiculoTotalEstoqueDTO;
 import com.andresimiquelli.tinnovaveiculos.entities.Veiculo;
 import com.andresimiquelli.tinnovaveiculos.repositories.VeiculoRepository;
+import com.andresimiquelli.tinnovaveiculos.utils.CalcDecada;
 
 @Service
 public class VeiculoService {
@@ -94,6 +97,28 @@ public class VeiculoService {
 	
 	public void delete(Long id) {
 		repository.deleteById(id);
+	}
+	
+	public VeiculoTotalEstoqueDTO countTotalVendido(boolean vendido) {
+		return new VeiculoTotalEstoqueDTO(repository.countByVendido(vendido));
+	}
+	
+	public List<VeiculoDecadaDTO> countTotalByDecada() {
+		
+		List<VeiculoDecadaDTO> list = new ArrayList<>();
+		
+		int anoMin = repository.minAno();
+		int anoMax = repository.maxAno();
+		
+		int decadaStart = CalcDecada.getStart(anoMin);
+		int decadaEnd = CalcDecada.getEnd(anoMax);
+		
+		for(int decada = decadaStart; decada < decadaEnd; decada += 10) {
+			int total = repository.countByAno(decada, decada+9);
+			list.add(new VeiculoDecadaDTO(decada, total));
+		}
+		
+		return list;
 	}
 	
 	private Veiculo fromDTO(VeiculoPostDTO data) {
