@@ -31,6 +31,10 @@ const ListaVeiculos: React.FC<ListaVeiculosProps> = ( { lasWeek } ) => {
     const[showDeleteModal, setShowDeleteModal] = useState(false)
     const[deleteId, setDeleteId] = useState(0)
 
+    const[searchMarca, setSearchMarca] = useState('')
+    const[searchAno, setSearchAno] = useState(0)
+    const[searchCor, setSearchCor] = useState('')
+
     useEffect(() => {
         if(lasWeek)
             loadLastWeek()
@@ -93,6 +97,42 @@ const ListaVeiculos: React.FC<ListaVeiculosProps> = ( { lasWeek } ) => {
         navigate('/form/'+id)
     }
 
+    function search(e: React.FormEvent) {
+        e.preventDefault()
+
+        let query = "?";
+
+        if(searchMarca.length > 0)
+            query += (query.length>1?'&':'')+"marca="+encodeURI(searchMarca)
+
+        if(searchAno > 0)
+            query += (query.length>1?'&':'')+"ano="+searchAno
+
+        if(searchCor.length > 0)
+            query += (query.length>1?'&':'')+"cor="+encodeURI(searchCor)
+
+        axios.get(apiUrl+'/veiculos'+ query)
+        .then(
+            response => {
+                setVeiculos(response.data as veiculo[])
+            }
+        )
+        .catch(
+            error => {
+                console.log(error)
+                alert("Erro ao carregar veículos")
+            }
+        )
+    }
+
+    function clearSearch() {
+        setSearchAno(0)
+        setSearchMarca('')
+        setSearchCor('')
+
+        loadVeiculos()
+    }
+
     return (
         <>
         <Header title={lasWeek? 'Cadastros da última semana' : 'Lista de veículos'} />
@@ -103,11 +143,34 @@ const ListaVeiculos: React.FC<ListaVeiculosProps> = ( { lasWeek } ) => {
                 </Col>
             </Row>
             <Row>
+                <Col className='mt-2 mb-3'>
+                    <h5>Pesquisa</h5>
+                <form onSubmit={search}>
+                    <Row>
+                        <Col>
+                            <input type="text" value={searchMarca} placeholder="Marca" onChange={(e) => { setSearchMarca(e.target.value)}}/>
+                        </Col>
+                        <Col>
+                            <input type="number" step="1" value={searchAno>0? searchAno : ''} placeholder="Ano" onChange={(e) => { setSearchAno(parseInt(e.target.value))}}/>
+                        </Col>
+                        <Col>
+                            <input type="text" value={searchCor} placeholder="Cor" onChange={(e) => { setSearchCor(e.target.value)}}/>
+                        </Col>
+                        <Col>
+                            <Button variant='info' type='submit'>Buscar</Button> &nbsp;
+                            <Button variant='secondar' onClick={clearSearch}>Limpar</Button>
+                        </Col>
+                    </Row>
+                </form>
+                </Col>
+            </Row>
+            <Row>
                 <Col lg={12}>
                     <VeiculoTable veiculos={veiculos} onDelete={deleteVeiculo} onEdit={editVeiculo} />
                 </Col>
             </Row>
         </Container>
+
         <Modal show={showDeleteModal} onHide={handleClose}>
             <Modal.Header closeButton>
                 <Modal.Title>Excluir veículo</Modal.Title>
