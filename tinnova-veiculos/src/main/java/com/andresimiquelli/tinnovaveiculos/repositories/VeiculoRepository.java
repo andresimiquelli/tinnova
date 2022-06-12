@@ -1,5 +1,6 @@
 package com.andresimiquelli.tinnovaveiculos.repositories;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Tuple;
@@ -38,4 +39,7 @@ public interface VeiculoRepository extends JpaRepository<Veiculo, Long> {
 	
 	@Query("SELECT marca, COUNT(*) AS total FROM Veiculo GROUP BY marca")
 	List<Tuple> countByMarca();
+	
+	@Query("SELECT v FROM Veiculo v WHERE created >= ?1 AND created <= ?2")
+	List<Veiculo> findByCreatedRange(Date start, Date end);
 }

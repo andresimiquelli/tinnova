@@ -1,6 +1,8 @@
 package com.andresimiquelli.tinnovaveiculos.services;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -131,6 +133,18 @@ public class VeiculoService {
 				.collect(Collectors.toList());
 		
 		return list;
+	}
+	
+	public List<VeiculoDTO> listBySemana() {
+		Date end = new Date();
+		Date start = new Date();
+		Calendar calendar = Calendar.getInstance(); 
+		calendar.setTime(start); 
+		calendar.add(Calendar.DATE, -7);
+		start = calendar.getTime();
+		
+		List<Veiculo> result = repository.findByCreatedRange(start, end);
+		return resultToDTOList(result);
 	}
 	
 	private Veiculo fromDTO(VeiculoPostDTO data) {

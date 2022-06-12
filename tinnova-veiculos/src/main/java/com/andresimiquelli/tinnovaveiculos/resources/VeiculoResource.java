@@ -88,4 +88,10 @@ public class VeiculoResource {
 		List<VeiculoTotalMarcaDTO> list = service.countTotalByMarca();
 		return ResponseEntity.ok(list);
 	}
+	
+	@GetMapping(value = "/semana")
+	public ResponseEntity<List<VeiculoDTO>> getLastWeek() {
+		List<VeiculoDTO> list = service.listBySemana();
+		return ResponseEntity.ok(list);
+	}
 }
