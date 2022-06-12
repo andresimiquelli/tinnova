@@ -1,5 +1,6 @@
 package com.andresimiquelli.tinnovaveiculos.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,9 +18,32 @@ public class VeiculoService {
 	@Autowired
 	private VeiculoRepository repository;
 	
-	public List<VeiculoDTO> listAll() {
-		List<Veiculo> result = repository.findAll();
-		List<VeiculoDTO> list = result.stream().map(item -> new VeiculoDTO(item)).collect(Collectors.toList());
+	public List<VeiculoDTO> listAll(String marca, Integer ano) {
+		
+		List<VeiculoDTO> list = new ArrayList<>();
+		
+		if(marca != null || ano != null) {
+			
+			if(marca != null && ano == null) {
+				List<Veiculo> result = repository.findByMarca(marca);
+				list = resultToDTOList(result);
+			}
+			
+			if(marca == null && ano != null) {
+				List<Veiculo> result = repository.findByAno(ano);
+				list = resultToDTOList(result);
+			}
+			
+			if(marca != null && ano != null) {
+				List<Veiculo> result = repository.findByAnoAndMarca(ano, marca);
+				list = resultToDTOList(result);
+			}
+			
+		}else {
+			List<Veiculo> result = repository.findAll();
+			list = resultToDTOList(result);
+		}
+		
 		return list;
 	}
 	
@@ -93,5 +117,10 @@ public class VeiculoService {
 			veiculo.setVendido(data.getVendido());
 		
 		return veiculo;
+	}
+	
+	private List<VeiculoDTO> resultToDTOList(List<Veiculo> result) {
+		List<VeiculoDTO> list = result.stream().map(item -> new VeiculoDTO(item)).collect(Collectors.toList());
+		return list;
 	}
 }

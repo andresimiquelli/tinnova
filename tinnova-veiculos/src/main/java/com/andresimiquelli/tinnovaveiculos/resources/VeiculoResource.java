@@ -13,13 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.andresimiquelli.tinnovaveiculos.dtos.VeiculoDTO;
 import com.andresimiquelli.tinnovaveiculos.dtos.VeiculoPostDTO;
-import com.andresimiquelli.tinnovaveiculos.entities.Veiculo;
-import com.andresimiquelli.tinnovaveiculos.repositories.VeiculoRepository;
 import com.andresimiquelli.tinnovaveiculos.services.VeiculoService;
 
 @RestController
@@ -30,8 +29,9 @@ public class VeiculoResource {
 	VeiculoService service;
 	
 	@GetMapping
-	public ResponseEntity<List<VeiculoDTO>> findAll() {
-		List<VeiculoDTO> list = service.listAll();
+	public ResponseEntity<List<VeiculoDTO>> findAll(
+			@RequestParam(required = false) String marca, @RequestParam(required = false) Integer ano ) {
+		List<VeiculoDTO> list = service.listAll(marca, ano);
 		return ResponseEntity.ok(list);
 	}
 	
