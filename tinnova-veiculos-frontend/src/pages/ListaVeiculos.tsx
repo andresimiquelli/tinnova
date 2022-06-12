@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Col, Container, Row, Table } from 'react-bootstrap';
+import { Button, Col, Container, Modal, Row, Table } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { apiUrl } from '../config';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { AiFillEdit } from 'react-icons/ai';
 import Header from '../components/Header';
+import VeiculoTable from '../components/VeiculoTable';
 
 interface veiculo {
     id: number;
@@ -21,7 +22,10 @@ interface veiculo {
 
 const ListaVeiculos: React.FC = () => {
 
+    const navigate = useNavigate()
     const[veiculos, setVeiculos] = useState([] as veiculo[])
+    const[showDeleteModal, setShowDeleteModal] = useState(false)
+    const[deleteId, setDeleteId] = useState(0)
 
     useEffect(() => {
         loadVeiculos()
@@ -35,52 +39,62 @@ const ListaVeiculos: React.FC = () => {
         )
     }
 
+    const handleClose = () => setShowDeleteModal(false)
+
+    function deleteVeiculo(id: number) {
+        setDeleteId(id)
+        setShowDeleteModal(true)
+    }
+
+    function deleteVeiculoConfirm() {
+        axios.delete(apiUrl+'/veiculos/'+deleteId)
+        .then(
+            () => loadVeiculos()
+        )
+        .catch(
+            error => {
+                console.log(error)
+                alert("Erro ao excluir veículo.")
+            }
+        )
+        .finally(
+            () => setShowDeleteModal(false)
+        )
+    }
+
+    function editVeiculo(id: number) {
+        navigate('/form/'+id)
+    }
+
     return (
         <>
         <Header title='Tinnova' />
         <Container>
             <Row className="mb-3">
                 <Col>
-                    <Button variant='info'> + Novo veículo</Button>
+                    <Button variant='info' onClick={() => { navigate('/form')}}>+ Cadastro de veículo</Button>
                 </Col>
             </Row>
             <Row>
                 <Col lg={12}>
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <td>Veículo</td>
-                                <td>Marca</td>
-                                <td>Ano</td>
-                                <td>Cor</td>
-                                <td>Descrição</td>
-                                <td>Vendido</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                veiculos.map(item => (
-                                    <tr key={item.id}>
-                                        <td>{item.veiculo}</td>
-                                        <td>{item.marca}</td>
-                                        <td>{item.ano}</td>
-                                        <td>{item.cor}</td>
-                                        <td>{item.descricao}</td>
-                                        <td>{item.vendido? 'Sim' : 'Não'}</td>
-                                        <td>
-                                            <Button variant="info"><AiFillEdit/> Editar</Button> 
-                                            &nbsp;
-                                            <Button variant="secondary"><AiFillEdit/> Excluir</Button>
-                                        </td>
-                                    </tr>
-                                ))
-                            }
-                        </tbody>
-                    </Table>
+                    <VeiculoTable veiculos={veiculos} onDelete={deleteVeiculo} onEdit={editVeiculo} />
                 </Col>
             </Row>
         </Container>
+        <Modal show={showDeleteModal} onHide={handleClose}>
+            <Modal.Header closeButton>
+                <Modal.Title>Excluir veículo</Modal.Title>
+            </Modal.Header>
+                    <Modal.Body>Deseja excluir este veículo?</Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                    Não
+                </Button>
+                <Button variant="primary" onClick={deleteVeiculoConfirm}>
+                    Sim
+                </Button>
+            </Modal.Footer>
+        </Modal>
         </>
     );
 }
