@@ -88,6 +88,7 @@ Retorna lista com o total de veículos cadastrados por marca
         "total": 5
     }
 ]
+```
 
 #### GET /veiculos/semana
 
