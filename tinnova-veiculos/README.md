@@ -99,17 +99,17 @@ Retorna lista com os veículos cadastrados nos últimos 7 dias.
 Para rodar o servidor localmente com o Maven, no diretório do projeto, com o prompt de comando execute:
 
 ```
-$ mvn clean package
+mvn clean package
 ```
 
 Entre no diretório target
 
 ```
-$ cd target
+cd target
 ```
 Execute o pacote .jar
 ```
-$ java -jar tinnova-veiculos-0.0.1-SNAPSHOT.jar
+java -jar tinnova-veiculos-0.0.1-SNAPSHOT.jar
 ```
 
 O servidor estará rodando na porta 8080. http://localhost:8080

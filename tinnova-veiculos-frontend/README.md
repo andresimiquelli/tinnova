@@ -31,10 +31,9 @@ Faça o build do projeto com:
 ```
 yarn build
 ```
-Faça o build do projeto com:
 
 ## 🔧 Configuração
-Caso o servidor não esteja rodando localmente na porta 8080, será preciso alterar o arquivo de configuração antes de servir a plicação o fazer o build.
+Caso o servidor não esteja rodando localmente na porta 8080, será preciso alterar o arquivo de configuração antes de servir a plicação ou fazer o build.
 
 ##### Altere o arquivo config.js
 Na pasta src, altere a url da api
