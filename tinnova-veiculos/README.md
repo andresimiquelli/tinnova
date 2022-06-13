@@ -7,7 +7,7 @@ Api RESTful para cadastro de veículos desenvolvida com Spring Boot.
 - [X] Totais de veículos por marca
 - [X] Totais de veículos por década
 - [X] Totais de veículos não vendidos
-- [X] Veículos cadtrados na última semana
+- [X] Veículos cadastrados na última semana
 
 ## End-points da API
 

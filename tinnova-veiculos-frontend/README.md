@@ -1,46 +1,58 @@
-# Getting Started with Create React App
+# Desafio 5 - Cadastro de veículos (Front-End)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+SPA desenvolvido em React.JS que consome a API tinnnova-veiculos.
 
-## Available Scripts
+- [X] CRUD
+- [X] Busca por marca, ano e cor
+- [X] Totais de veículos por marca
+- [X] Totais de veículos por década
+- [X] Totais de veículos não vendidos
+- [X] Veículos cadastrados na última semana
 
-In the project directory, you can run:
 
-### `npm start`
+## 🔧 Instalação
+Depois de clonar este repositório, instale as dependências com:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+yarn install
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Rode a aplicação com:
 
-### `npm test`
+```
+yarn start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Acesse `http://localhost:3000` no seu navegador.
 
-### `npm run build`
+## 🔧 Deploy
+Faça o build do projeto com:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+yarn build
+```
+Faça o build do projeto com:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🔧 Configuração
+Caso o servidor não esteja rodando localmente na porta 8080, será preciso alterar o arquivo de configuração antes de servir a plicação o fazer o build.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+##### Altere o arquivo config.js
+Na pasta src, altere a url da api
 
-### `npm run eject`
+```
+export const apiUrl = "http://localhost:8080";
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 🛠️ Tecnologias & Libs
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Mencione as ferramentas que você usou para criar seu projeto
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+* [React](https://reactjs.org/) 
+* CSS
+* HTML
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+E com as bibliotecas:
+* [Bootstrap](https://getbootstrap.com/)
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## ✒️ Autor
+João André Simiquelli
