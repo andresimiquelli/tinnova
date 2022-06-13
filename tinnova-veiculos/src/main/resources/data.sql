@@ -2,3 +2,5 @@ insert into VEICULO(veiculo, marca, ano, cor, descricao, vendido, created, updat
 insert into VEICULO(veiculo, marca, ano, cor, descricao, vendido, created, updated) VALUES ('Yaris','Toyota',2020,'branco','Yaris 1.5 at hatch',0,'2022-06-02 13:50:00','2022-06-02 13:50:00');
 insert into VEICULO(veiculo, marca, ano, cor, descricao, vendido, created, updated) VALUES ('Argo','Fiat',2018,'vermelho','Fiat Argo Hatch',1,'2022-06-11 13:50:00','2022-06-11 13:50:00');
 insert into VEICULO(veiculo, marca, ano, cor, descricao, vendido, created, updated) VALUES ('Strada','Fiat',2019,'preto','Fiat Strada Caminhonete',0,'2022-06-11 13:50:00','2022-06-11 13:50:00');
+insert into VEICULO(veiculo, marca, ano, cor, descricao, vendido, created, updated) VALUES ('HRV','Honda',2017,'prata','SUV HRV',1,'2022-06-01 13:50:00','2022-06-01 13:50:00');
+insert into VEICULO(veiculo, marca, ano, cor, descricao, vendido, created, updated) VALUES ('Toro','Fiat',2019,'branco','Caminhonete Toro',1,'2022-06-01 13:50:00','2022-06-01 13:50:00');
